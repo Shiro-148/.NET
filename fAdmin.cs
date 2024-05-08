@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using QuanLiCafe.DAO;
+
 
 namespace QuanLiCafe
 {
@@ -15,26 +18,17 @@ namespace QuanLiCafe
         public fAdmin()
         {
             InitializeComponent();
+            loadAccountList();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        void loadAccountList()
         {
+            string query = "EXEC dbo.USP_GetAccountByUserName @userName";
+
+            DataProvider provider = new DataProvider();
+
+            dtgvAccount.DataSource = provider.ExecuteQuery(query, new object[] {"Shiro"});
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btnBillView_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
