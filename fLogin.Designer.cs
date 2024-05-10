@@ -32,10 +32,10 @@
             btnExit = new Button();
             btnLogin = new Button();
             panel3 = new Panel();
-            txBPassWord = new TextBox();
+            txbPassWord = new TextBox();
             label2 = new Label();
             panel2 = new Panel();
-            txBUserName = new TextBox();
+            txbUserName = new TextBox();
             label1 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -78,20 +78,21 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(txBPassWord);
+            panel3.Controls.Add(txbPassWord);
             panel3.Controls.Add(label2);
             panel3.Location = new Point(0, 104);
             panel3.Name = "panel3";
             panel3.Size = new Size(590, 70);
             panel3.TabIndex = 3;
             // 
-            // txBPassWord
+            // txbPassWord
             // 
-            txBPassWord.Location = new Point(194, 16);
-            txBPassWord.Name = "txBPassWord";
-            txBPassWord.Size = new Size(371, 27);
-            txBPassWord.TabIndex = 2;
-            txBPassWord.UseSystemPasswordChar = true;
+            txbPassWord.Location = new Point(194, 16);
+            txbPassWord.Name = "txbPassWord";
+            txbPassWord.Size = new Size(371, 27);
+            txbPassWord.TabIndex = 2;
+            txbPassWord.Text = "1";
+            txbPassWord.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -105,19 +106,20 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(txBUserName);
+            panel2.Controls.Add(txbUserName);
             panel2.Controls.Add(label1);
             panel2.Location = new Point(2, 27);
             panel2.Name = "panel2";
             panel2.Size = new Size(590, 71);
             panel2.TabIndex = 0;
             // 
-            // txBUserName
+            // txbUserName
             // 
-            txBUserName.Location = new Point(191, 18);
-            txBUserName.Name = "txBUserName";
-            txBUserName.Size = new Size(371, 27);
-            txBUserName.TabIndex = 2;
+            txbUserName.Location = new Point(191, 18);
+            txbUserName.Name = "txbUserName";
+            txbUserName.Size = new Size(371, 27);
+            txbUserName.TabIndex = 2;
+            txbUserName.Text = "Shiro";
             // 
             // label1
             // 
@@ -154,9 +156,9 @@
         private Panel panel1;
         private Panel panel2;
         private Label label1;
-        private TextBox txBUserName;
+        private TextBox txbUserName;
         private Panel panel3;
-        private TextBox txBPassWord;
+        private TextBox txbPassWord;
         private Label label2;
         private Button btnLogin;
         private Button btnExit;

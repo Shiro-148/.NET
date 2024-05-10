@@ -71,7 +71,6 @@
             adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             adminToolStripMenuItem.Size = new Size(67, 24);
             adminToolStripMenuItem.Text = "Admin";
-            adminToolStripMenuItem.Click += adminToolStripMenuItem_Click;
             // 
             // thôngTinTàiKhoanToolStripMenuItem
             // 
@@ -85,14 +84,12 @@
             thôngToolStripMenuItem.Name = "thôngToolStripMenuItem";
             thôngToolStripMenuItem.Size = new Size(214, 26);
             thôngToolStripMenuItem.Text = "Thông tin cá nhân ";
-            thôngToolStripMenuItem.Click += thôngToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
             đăngXuấtToolStripMenuItem.Size = new Size(214, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
-            đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
             // panel2
             // 
@@ -109,7 +106,6 @@
             listView.Size = new Size(435, 359);
             listView.TabIndex = 0;
             listView.UseCompatibleStateImageBehavior = false;
-            listView.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // panel3
             // 
@@ -158,7 +154,6 @@
             btnDiscount.TabIndex = 5;
             btnDiscount.Text = "Giảm giá";
             btnDiscount.UseVisualStyleBackColor = false;
-            btnDiscount.Click += button1_Click;
             // 
             // btnCheckOut
             // 
@@ -218,6 +213,7 @@
             // 
             // flpTable
             // 
+            flpTable.AutoScroll = true;
             flpTable.Location = new Point(12, 31);
             flpTable.Name = "flpTable";
             flpTable.Size = new Size(640, 524);
@@ -236,7 +232,6 @@
             MainMenuStrip = menuStrip1;
             Name = "fTableManager";
             Text = "Quản Lý Quán Cafe";
-            Load += fTableManager_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);

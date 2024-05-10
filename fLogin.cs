@@ -1,4 +1,6 @@
 ﻿
+using QuanLiCafe.DAO;
+
 namespace QuanLiCafe
 {
     public partial class fLogin : Form
@@ -10,12 +12,27 @@ namespace QuanLiCafe
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            fTableManager f = new fTableManager();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            string userName = txbUserName.Text;
+            string passWord = txbPassWord.Text;
+            if (Login(userName, passWord))
+            {
 
+                fTableManager f = new fTableManager();
+                this.Hide();
+                f.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                MessageBox.Show("Tài khoản không đúng!");
+            }  
         }
+
+        bool Login(string userName, string passWord)
+        {
+            return AccountDAO.Instance.Login(userName, passWord);
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -28,9 +45,6 @@ namespace QuanLiCafe
                 e.Cancel = true;
             }
         }
-
-
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 

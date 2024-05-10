@@ -100,3 +100,37 @@ END
 GO
 
 EXEC dbo.USP_GetAccountByUserName @userName = N'Shiro'
+
+GO
+
+CREATE PROC USP_Login
+@userName NVARCHAR(100), @passWord nvarchar(100)
+AS
+BEGIN
+	SELECT * FROM dbo.Account WHERE UserName = @userName AND PassWord = @passWord
+END
+
+GO
+declare @i int = 0
+
+while @i <= 10
+begin
+	insert dbo.TableFood (name ) values (N'Bàn ' + cast(@i AS NVARCHAR(100)))
+	set @i = @i + 1
+end
+
+select * from dbo.TableFood
+--delete from dbo.TableFood Where id < 200
+--DBCC CHECKIDENT('TableFood', RESEED, 0)
+GO
+
+CREATE PROC USP_GetTableList
+AS SELECT * FROM dbo.TableFood
+GO
+
+update dbo.TableFood SET status = N'Có người' where id = 3
+
+EXEC dbo.USP_GetTableList
+
+GO
+

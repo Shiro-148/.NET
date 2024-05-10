@@ -18,17 +18,6 @@ namespace QuanLiCafe
         public fAdmin()
         {
             InitializeComponent();
-            loadAccountList();
         }
-        void loadAccountList()
-        {
-            string query = "EXEC dbo.USP_GetAccountByUserName @userName";
-
-            DataProvider provider = new DataProvider();
-
-            dtgvAccount.DataSource = provider.ExecuteQuery(query, new object[] {"Shiro"});
-
-        }
-
     }
 }
