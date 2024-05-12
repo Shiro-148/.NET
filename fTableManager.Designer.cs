@@ -34,18 +34,23 @@
             thôngToolStripMenuItem = new ToolStripMenuItem();
             đăngXuấtToolStripMenuItem = new ToolStripMenuItem();
             panel2 = new Panel();
-            listView = new ListView();
+            lsvBill = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             panel3 = new Panel();
+            txbTotalPrice = new TextBox();
             cbSwitchTable = new ComboBox();
             btnSwitchTable = new Button();
             numericDiscount = new NumericUpDown();
             btnDiscount = new Button();
             btnCheckOut = new Button();
             panel4 = new Panel();
-            numericFoodCount = new NumericUpDown();
+            cbCategory1 = new ComboBox();
+            nmFoodCount = new NumericUpDown();
             btnAddfood = new Button();
-            comboBox1 = new ComboBox();
-            comboBox = new ComboBox();
+            cbFood = new ComboBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             flpTable = new FlowLayoutPanel();
             menuStrip1.SuspendLayout();
@@ -53,7 +58,7 @@
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericDiscount).BeginInit();
             panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericFoodCount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nmFoodCount).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -62,7 +67,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { adminToolStripMenuItem, thôngTinTàiKhoanToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1105, 28);
+            menuStrip1.Size = new Size(1118, 28);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -93,22 +98,46 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(listView);
+            panel2.Controls.Add(lsvBill);
             panel2.Location = new Point(658, 109);
             panel2.Name = "panel2";
             panel2.Size = new Size(435, 359);
             panel2.TabIndex = 1;
             // 
-            // listView
+            // lsvBill
             // 
-            listView.Location = new Point(0, 0);
-            listView.Name = "listView";
-            listView.Size = new Size(435, 359);
-            listView.TabIndex = 0;
-            listView.UseCompatibleStateImageBehavior = false;
+            lsvBill.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            lsvBill.GridLines = true;
+            lsvBill.Location = new Point(3, -3);
+            lsvBill.Name = "lsvBill";
+            lsvBill.Size = new Size(429, 359);
+            lsvBill.TabIndex = 0;
+            lsvBill.UseCompatibleStateImageBehavior = false;
+            lsvBill.View = View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Tên món";
+            columnHeader1.Width = 120;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Số lượng";
+            columnHeader2.Width = 80;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Đơn giá";
+            columnHeader3.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Thành tiền";
+            columnHeader4.Width = 140;
             // 
             // panel3
             // 
+            panel3.Controls.Add(txbTotalPrice);
             panel3.Controls.Add(cbSwitchTable);
             panel3.Controls.Add(btnSwitchTable);
             panel3.Controls.Add(numericDiscount);
@@ -119,12 +148,24 @@
             panel3.Size = new Size(435, 81);
             panel3.TabIndex = 1;
             // 
+            // txbTotalPrice
+            // 
+            txbTotalPrice.Font = new Font("Arial", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txbTotalPrice.ForeColor = Color.OrangeRed;
+            txbTotalPrice.Location = new Point(201, 25);
+            txbTotalPrice.Name = "txbTotalPrice";
+            txbTotalPrice.ReadOnly = true;
+            txbTotalPrice.Size = new Size(122, 28);
+            txbTotalPrice.TabIndex = 7;
+            txbTotalPrice.Text = "0";
+            txbTotalPrice.TextAlign = HorizontalAlignment.Right;
+            // 
             // cbSwitchTable
             // 
             cbSwitchTable.FormattingEnabled = true;
             cbSwitchTable.Location = new Point(3, 46);
             cbSwitchTable.Name = "cbSwitchTable";
-            cbSwitchTable.Size = new Size(106, 28);
+            cbSwitchTable.Size = new Size(98, 28);
             cbSwitchTable.TabIndex = 4;
             // 
             // btnSwitchTable
@@ -132,25 +173,25 @@
             btnSwitchTable.BackColor = SystemColors.ControlLight;
             btnSwitchTable.Location = new Point(3, 3);
             btnSwitchTable.Name = "btnSwitchTable";
-            btnSwitchTable.Size = new Size(106, 36);
+            btnSwitchTable.Size = new Size(98, 36);
             btnSwitchTable.TabIndex = 6;
             btnSwitchTable.Text = "Chuyển bàn";
             btnSwitchTable.UseVisualStyleBackColor = false;
             // 
             // numericDiscount
             // 
-            numericDiscount.Location = new Point(161, 46);
+            numericDiscount.Location = new Point(107, 45);
             numericDiscount.Name = "numericDiscount";
-            numericDiscount.Size = new Size(106, 27);
+            numericDiscount.Size = new Size(88, 27);
             numericDiscount.TabIndex = 4;
             numericDiscount.TextAlign = HorizontalAlignment.Center;
             // 
             // btnDiscount
             // 
             btnDiscount.BackColor = SystemColors.ControlLight;
-            btnDiscount.Location = new Point(161, 4);
+            btnDiscount.Location = new Point(107, 3);
             btnDiscount.Name = "btnDiscount";
-            btnDiscount.Size = new Size(106, 36);
+            btnDiscount.Size = new Size(88, 36);
             btnDiscount.TabIndex = 5;
             btnDiscount.Text = "Giảm giá";
             btnDiscount.UseVisualStyleBackColor = false;
@@ -158,7 +199,7 @@
             // btnCheckOut
             // 
             btnCheckOut.BackColor = SystemColors.ControlLight;
-            btnCheckOut.Location = new Point(326, 0);
+            btnCheckOut.Location = new Point(329, 0);
             btnCheckOut.Name = "btnCheckOut";
             btnCheckOut.Size = new Size(106, 78);
             btnCheckOut.TabIndex = 4;
@@ -167,23 +208,32 @@
             // 
             // panel4
             // 
-            panel4.Controls.Add(numericFoodCount);
+            panel4.Controls.Add(cbCategory1);
+            panel4.Controls.Add(nmFoodCount);
             panel4.Controls.Add(btnAddfood);
-            panel4.Controls.Add(comboBox1);
-            panel4.Controls.Add(comboBox);
+            panel4.Controls.Add(cbFood);
             panel4.Location = new Point(658, 31);
             panel4.Name = "panel4";
             panel4.Size = new Size(435, 72);
             panel4.TabIndex = 1;
             // 
-            // numericFoodCount
+            // cbCategory1
             // 
-            numericFoodCount.Location = new Point(369, 24);
-            numericFoodCount.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
-            numericFoodCount.Name = "numericFoodCount";
-            numericFoodCount.Size = new Size(63, 27);
-            numericFoodCount.TabIndex = 3;
-            numericFoodCount.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            cbCategory1.FormattingEnabled = true;
+            cbCategory1.Location = new Point(0, 3);
+            cbCategory1.Name = "cbCategory1";
+            cbCategory1.Size = new Size(251, 28);
+            cbCategory1.TabIndex = 4;
+            cbCategory1.SelectedIndexChanged += cbCategory_SelectedlndexChanged;
+            // 
+            // nmFoodCount
+            // 
+            nmFoodCount.Location = new Point(369, 24);
+            nmFoodCount.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
+            nmFoodCount.Name = "nmFoodCount";
+            nmFoodCount.Size = new Size(63, 27);
+            nmFoodCount.TabIndex = 3;
+            nmFoodCount.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // btnAddfood
             // 
@@ -194,22 +244,15 @@
             btnAddfood.TabIndex = 2;
             btnAddfood.Text = "Thêm món";
             btnAddfood.UseVisualStyleBackColor = false;
+            btnAddfood.Click += btnAddfood_Click;
             // 
-            // comboBox1
+            // cbFood
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(3, 37);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(248, 28);
-            comboBox1.TabIndex = 1;
-            // 
-            // comboBox
-            // 
-            comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(3, 3);
-            comboBox.Name = "comboBox";
-            comboBox.Size = new Size(248, 28);
-            comboBox.TabIndex = 0;
+            cbFood.FormattingEnabled = true;
+            cbFood.Location = new Point(3, 37);
+            cbFood.Name = "cbFood";
+            cbFood.Size = new Size(248, 28);
+            cbFood.TabIndex = 1;
             // 
             // flpTable
             // 
@@ -223,7 +266,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1105, 567);
+            ClientSize = new Size(1118, 567);
             Controls.Add(flpTable);
             Controls.Add(panel4);
             Controls.Add(panel3);
@@ -236,9 +279,10 @@
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericDiscount).EndInit();
             panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)numericFoodCount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nmFoodCount).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -251,18 +295,24 @@
         private ToolStripMenuItem đăngXuấtToolStripMenuItem;
         private Panel panel2;
         private Panel panel3;
-        private ListView listView;
+        private ListView lsvBill;
         private Panel panel4;
-        private ComboBox comboBox;
-        private ComboBox comboBox1;
+        private ComboBox cbFood;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button btnAddfood;
-        private NumericUpDown numericFoodCount;
+        private NumericUpDown nmFoodCount;
         private FlowLayoutPanel flpTable;
         private Button btnCheckOut;
         private Button btnDiscount;
         private NumericUpDown numericDiscount;
         private Button btnSwitchTable;
         private ComboBox cbSwitchTable;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private TextBox txbTotalPrice;
+        private ComboBox cbCategory;
+        private ComboBox cbCategory1;
     }
 }
