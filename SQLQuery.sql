@@ -111,6 +111,8 @@ BEGIN
 END
 
 GO
+
+--Them  ban
 declare @i int = 0
 
 while @i <= 10
@@ -134,3 +136,214 @@ EXEC dbo.USP_GetTableList
 
 GO
 
+--them category
+insert dbo.FoodCategory 
+		(name)
+values (N'Hải sản')
+insert dbo.FoodCategory 
+		(name)
+values (N'Nông sản')
+insert dbo.FoodCategory 
+		(name)
+values (N'Nước')
+
+--Them mon an
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'Mực hấp', 1, 120000)
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'Cua rang me', 1, 200000)
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'Rau sống', 3, 30000)
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'Thịt lợn nướng', 2, 100000)
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'7Up', 3, 12000)
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'Sting', 3, 12000)
+
+insert dbo.Food 
+		(name, idCategory, price)
+values (N'Bia', 3, 10000)
+
+insert dbo.Bill
+		(DateCheckIn,
+		DateCheckOut,
+		idTable,
+		status
+		)
+values (GETDATE() ,
+		NULL,
+		1,
+		0
+		)
+
+insert dbo.Bill
+		(DateCheckIn,
+		DateCheckOut,
+		idTable,
+		status
+		)
+values (GETDATE() ,
+		NULL,
+		2,
+		0
+		)
+
+insert dbo.Bill
+		(DateCheckIn,
+		DateCheckOut,
+		idTable,
+		status
+		)
+values (GETDATE() ,
+		GETDATE() ,
+		2,
+		1
+		)
+
+--Them bill info
+
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (1,
+		1,
+		2
+		)
+
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (1,
+		2,
+		3
+		)
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (1,
+		3,
+		4
+		)
+
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (1,
+		3,
+		2
+		)
+
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (2,
+		3,
+		4
+		)
+
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (3,
+		2,
+		4
+		)
+insert dbo.BillInfo
+		(idBill,
+		idFood,
+		count
+		)
+values (1,
+		6,
+		1
+		)
+
+GO
+
+select f.name, bi.count, f.price, f.price*bi.count as totalPrice from dbo.BillInfo as bi, dbo.Bill as b, dbo.Food as f
+where bi.idBill = b.id and bi.idFood = f.id and b.idTable = 1
+
+select * from dbo.Bill
+select * from dbo.BillInfo
+select * from dbo.Food
+select * from dbo.FoodCategory
+select * from dbo.Food
+
+GO
+create PROC USP_InsertBill 
+@idTable int 
+as
+begin
+	insert dbo.Bill
+		( DateCheckIn,
+		  DateCheckOut,
+		  idTable,
+		  status
+		)
+	values (GETDATE() ,
+			NULL,
+			@idTable,
+			0--status	
+			)
+end
+
+GO
+create Proc USP_InsertBillInfo 
+@idBill int, @idFood int, @count int
+as 
+begin
+	insert dbo.BillInfo
+		(idBill,idFood,count)
+	values (@idBill,@idFood,@count)
+end
+go
+ALTER Proc USP_InsertBillInfo 
+@idBill int, @idFood int, @count int
+as 
+begin
+	declare @isExitsBillInfo INT;
+	declare @foodCount int = 1
+	select @isExitsBillInfo = id, @foodCount = b.count
+	from dbo.BillInfo as b
+	where idBill = @idBill and idFood = @idFood
+	if (@isExitsBillInfo > 0)
+	begin
+		declare @newCount int = @foodCount +@count 
+		if(@newCount > 0)
+			update dbo.BillInfo set count = @foodCount + @count where idFood = @idFood
+		else 
+			delete dbo.BillInfo where idBill = @idBill AND idFood = @idFood 
+	end
+	else
+	begin
+		insert dbo.BillInfo
+			(idBill, idFood, count)
+		values (@idBill, @idFood, @count)
+	end
+end
+GO
