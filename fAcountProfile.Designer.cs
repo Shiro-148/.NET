@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             panel2 = new Panel();
-            txBUserName = new TextBox();
+            txbUserName = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
             txbDisplayName = new TextBox();
@@ -55,20 +55,20 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(txBUserName);
+            panel2.Controls.Add(txbUserName);
             panel2.Controls.Add(label1);
             panel2.Location = new Point(12, 12);
             panel2.Name = "panel2";
             panel2.Size = new Size(442, 59);
             panel2.TabIndex = 1;
             // 
-            // txBUserName
+            // txbUserName
             // 
-            txBUserName.Location = new Point(166, 18);
-            txBUserName.Name = "txBUserName";
-            txBUserName.ReadOnly = true;
-            txBUserName.Size = new Size(260, 27);
-            txBUserName.TabIndex = 2;
+            txbUserName.Location = new Point(166, 18);
+            txbUserName.Name = "txbUserName";
+            txbUserName.ReadOnly = true;
+            txbUserName.Size = new Size(260, 27);
+            txbUserName.TabIndex = 2;
             // 
             // label1
             // 
@@ -105,7 +105,6 @@
             label2.Size = new Size(135, 24);
             label2.TabIndex = 1;
             label2.Text = "Tên hiển thị: ";
-            label2.Click += label2_Click;
             // 
             // panel3
             // 
@@ -122,6 +121,7 @@
             txbPassWord.Name = "txbPassWord";
             txbPassWord.Size = new Size(260, 27);
             txbPassWord.TabIndex = 2;
+            txbPassWord.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -148,6 +148,7 @@
             txbNewPass.Name = "txbNewPass";
             txbNewPass.Size = new Size(260, 27);
             txbNewPass.TabIndex = 2;
+            txbNewPass.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -174,6 +175,7 @@
             txbReEnterPass.Name = "txbReEnterPass";
             txbReEnterPass.Size = new Size(260, 27);
             txbReEnterPass.TabIndex = 2;
+            txbReEnterPass.UseSystemPasswordChar = true;
             // 
             // label5
             // 
@@ -194,7 +196,7 @@
             btnUpdate.TabIndex = 6;
             btnUpdate.Text = "Cập nhật";
             btnUpdate.UseVisualStyleBackColor = false;
-            btnUpdate.Click += button1_Click;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnExit
             // 
@@ -205,6 +207,7 @@
             btnExit.TabIndex = 7;
             btnExit.Text = "Thoát";
             btnExit.UseVisualStyleBackColor = false;
+            btnExit.Click += btnExit_Click;
             // 
             // fAcountProfile
             // 
@@ -238,7 +241,7 @@
         #endregion
 
         private Panel panel2;
-        private TextBox txBUserName;
+        private TextBox txbUserName;
         private Label label1;
         private Panel panel1;
         private TextBox txbDisplayName;

@@ -20,6 +20,10 @@ namespace QuanLiCafe.DAO
 
         private BillInfoDAO() { }
 
+        public void DeleteBillInfoByFoodID(int id)
+        {
+            DataProvider.Instance.ExecuteQuery("delete dbo.BillInfo where idFood = " + id);
+        }
         public List<BillInfo> GetListBillInfo(int id) 
         {
             List<BillInfo> listBillInfo = new List<BillInfo>();

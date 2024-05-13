@@ -15,19 +15,34 @@
     using System.Runtime.CompilerServices;
 
 
-    namespace QuanLiCafe
-    {
+namespace QuanLiCafe
+{
+
     public partial class fTableManager : Form
     {
-        public fTableManager()
+        private Account loginAccount;
+
+        public Account LoginAccount
+        {
+            get { return loginAccount; }
+            set { loginAccount = value; ChangeAccount(loginAccount.Type); }
+        }
+        public fTableManager(Account acc)
         {
             InitializeComponent();
+            this.LoginAccount = acc;
             LoadTable();
             LoadCategory();
         }
 
         #region Method
+        void ChangeAccount(int type)
+        {
+            adminToolStripMenuItem.Enabled = type == 1;
+            
+            thôngTinTàiKhoanToolStripMenuItem.Text += " (" + loginAccount.DisplayName + ")";
 
+        }
         void LoadCategory()
         {
             List<Category> listCategory = CategoryDAO.Instance.GetListCategory();
@@ -123,6 +138,13 @@
         private void btnAddfood_Click(object sender, EventArgs e)
         {
             Table table = lsvBill.Tag as Table;
+
+            if (table == null)
+            {
+                MessageBox.Show("Hãy chọn bàn");
+                return;
+            }
+
             int idBill = BillDAO.Instance.GetUncheckBillIDByTableID(table.ID);
             int foodID = (cbFood.SelectedItem as Food).ID;
             int count = (int)nmFoodCount.Value;
@@ -164,11 +186,56 @@
 
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Create a new instance of the admin form
-            fAdmin adminForm = new fAdmin();
+            fAdmin f = new fAdmin();
+            f.InsertFood += f_InsertFood;
+            f.DeleteFood += f_DeleteFood;
+            f.UpdateFood += f_UpdateFood;
 
-            // Show the admin form
-            adminForm.Show();
+            f.ShowDialog();
+
+
+        }
+
+        private void f_UpdateFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory1.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+
+        private void f_DeleteFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory1.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+            LoadTable();
+        }
+
+        private void f_InsertFood(object sender, EventArgs e)
+        {
+            LoadFoodListByCategoryID((cbCategory1.SelectedItem as Category).ID);
+            if (lsvBill.Tag != null)
+                ShowBill((lsvBill.Tag as Table).ID);
+        }
+        private void thôngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Create a new instance of the account profile form
+            fAcountProfile f = new fAcountProfile(loginAccount);
+            f.UpdateAccount += f_UpdateAccount;
+            // Show the account profile form
+            f.ShowDialog();
+
+        }
+
+        private void f_UpdateAccount(object sender, AccountEvent e)
+        {
+            thôngToolStripMenuItem.Text = "Thông tin tài khoản (" + e.Acc.DisplayName + ")";
+            thôngTinTàiKhoanToolStripMenuItem.Text = "Thông tin tài khoản (" + e.Acc.DisplayName + ")";
+        }
+
+        private void thôngTinTàiKhoanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

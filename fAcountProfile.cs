@@ -7,24 +7,98 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLiCafe.DAO;
+using QuanLiCafe.DTO;
+using System.Data.SqlClient;
+
 
 namespace QuanLiCafe
 {
     public partial class fAcountProfile : Form
     {
-        public fAcountProfile()
+        private Account loginAccount;
+
+        public Account LoginAccount
+        {
+            get { return loginAccount; }
+            set { loginAccount = value; ChangeAccount(loginAccount); }
+        }
+        public fAcountProfile(Account acc)
         {
             InitializeComponent();
+            loginAccount = acc;
+            ChangeAccount(loginAccount);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        void UpdateAccountInfo()
         {
+            string displayName = txbDisplayName.Text;
+            string password = txbPassWord.Text;
+            string newpass = txbNewPass.Text;
+            string reenterPass = txbReEnterPass.Text;
+            string userName = txbUserName.Text;
+
+            if (!newpass.Equals(reenterPass))
+            {
+                MessageBox.Show("Vui lòng nhập lại mật khẩu đúng với mật khẩu mới!");
+            }
+            else
+            {
+                if (AccountDAO.Instance.UpdateAccount(userName, displayName, password, newpass))
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    if (updateAccount != null)
+                    {
+                        updateAccount(this, new AccountEvent(AccountDAO.Instance.GetAccountByUserName(userName)));
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng điền đúng mật khẩu");
+                }
+            }
+        }
+
+        void ChangeAccount(Account acc)
+        {
+            txbUserName.Text = LoginAccount.UserName;
+            txbDisplayName.Text = LoginAccount.DisplayName;
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private EventHandler<AccountEvent> updateAccount;
+        public event EventHandler<AccountEvent> UpdateAccount
         {
+            add { updateAccount += value; }
+            remove { updateAccount -= value; }
+        }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            UpdateAccountInfo();
+        }
+
+
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+    public class AccountEvent : EventArgs
+    {
+        private Account acc;
+
+        public Account Acc
+        {
+            get { return acc; }
+            set { acc = value; }
+        }
+
+        public AccountEvent(Account acc)
+        {
+            this.Acc = acc;
         }
     }
 }

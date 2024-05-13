@@ -85,17 +85,19 @@
             thôngTinTàiKhoanToolStripMenuItem.Name = "thôngTinTàiKhoanToolStripMenuItem";
             thôngTinTàiKhoanToolStripMenuItem.Size = new Size(151, 24);
             thôngTinTàiKhoanToolStripMenuItem.Text = "Thông tin tài khoản";
+            thôngTinTàiKhoanToolStripMenuItem.Click += thôngTinTàiKhoanToolStripMenuItem_Click;
             // 
             // thôngToolStripMenuItem
             // 
             thôngToolStripMenuItem.Name = "thôngToolStripMenuItem";
-            thôngToolStripMenuItem.Size = new Size(214, 26);
+            thôngToolStripMenuItem.Size = new Size(224, 26);
             thôngToolStripMenuItem.Text = "Thông tin cá nhân ";
+            thôngToolStripMenuItem.Click += thôngToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(214, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             // 
             // panel2

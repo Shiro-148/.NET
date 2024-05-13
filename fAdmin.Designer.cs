@@ -45,7 +45,7 @@
             nmFoodPrice = new NumericUpDown();
             label4 = new Label();
             panel9 = new Panel();
-            cbCategory = new ComboBox();
+            cbFoodCategory = new ComboBox();
             label3 = new Label();
             panel8 = new Panel();
             txbFoodName = new TextBox();
@@ -313,20 +313,20 @@
             // 
             // panel9
             // 
-            panel9.Controls.Add(cbCategory);
+            panel9.Controls.Add(cbFoodCategory);
             panel9.Controls.Add(label3);
             panel9.Location = new Point(3, 133);
             panel9.Name = "panel9";
             panel9.Size = new Size(310, 59);
             panel9.TabIndex = 5;
             // 
-            // cbCategory
+            // cbFoodCategory
             // 
-            cbCategory.FormattingEnabled = true;
-            cbCategory.Location = new Point(109, 15);
-            cbCategory.Name = "cbCategory";
-            cbCategory.Size = new Size(198, 28);
-            cbCategory.TabIndex = 2;
+            cbFoodCategory.FormattingEnabled = true;
+            cbFoodCategory.Location = new Point(109, 15);
+            cbFoodCategory.Name = "cbFoodCategory";
+            cbFoodCategory.Size = new Size(198, 28);
+            cbFoodCategory.TabIndex = 2;
             // 
             // label3
             // 
@@ -381,6 +381,7 @@
             txbFoodID.ReadOnly = true;
             txbFoodID.Size = new Size(198, 27);
             txbFoodID.TabIndex = 2;
+            txbFoodID.TextChanged += txbFoodID_TextChanged;
             // 
             // label2
             // 
@@ -411,6 +412,7 @@
             btnShowFood.TabIndex = 3;
             btnShowFood.Text = "Xem";
             btnShowFood.UseVisualStyleBackColor = true;
+            btnShowFood.Click += btnShowFood_Click;
             // 
             // btnEditFood
             // 
@@ -420,6 +422,7 @@
             btnEditFood.TabIndex = 2;
             btnEditFood.Text = "Sửa";
             btnEditFood.UseVisualStyleBackColor = true;
+            btnEditFood.Click += btnEditFood_Click;
             // 
             // btnDeleteFood
             // 
@@ -429,6 +432,7 @@
             btnDeleteFood.TabIndex = 1;
             btnDeleteFood.Text = "Xóa";
             btnDeleteFood.UseVisualStyleBackColor = true;
+            btnDeleteFood.Click += btnDeleteFood_Click;
             // 
             // btbnAddFood
             // 
@@ -438,6 +442,7 @@
             btbnAddFood.TabIndex = 0;
             btbnAddFood.Text = "Thêm";
             btbnAddFood.UseVisualStyleBackColor = true;
+            btbnAddFood.Click += btbnAddFood_Click;
             // 
             // panel3
             // 
@@ -449,6 +454,7 @@
             // 
             // dtgvFood
             // 
+            dtgvFood.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgvFood.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvFood.Location = new Point(0, 3);
             dtgvFood.Name = "dtgvFood";
@@ -1068,7 +1074,7 @@
         private Label label1;
         private Panel panel9;
         private Label label3;
-        private ComboBox cbCategory;
+        private ComboBox cbFoodCategory;
         private Panel panel10;
         private Label label4;
         private NumericUpDown nmFoodPrice;
