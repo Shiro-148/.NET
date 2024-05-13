@@ -200,6 +200,7 @@
             btnBillView.TabIndex = 2;
             btnBillView.Text = "Thống kê";
             btnBillView.UseVisualStyleBackColor = false;
+            btnBillView.Click += btnBillView_Click;
             // 
             // dtpkToDate
             // 
@@ -225,6 +226,7 @@
             // 
             // dtgvBill
             // 
+            dtgvBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgvBill.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtgvBill.Location = new Point(1, 2);
             dtgvBill.Name = "dtgvBill";

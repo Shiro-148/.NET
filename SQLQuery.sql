@@ -295,7 +295,7 @@ select * from dbo.FoodCategory
 select * from dbo.Food
 
 GO
-create PROC USP_InsertBill 
+CREATE PROC USP_InsertBill 
 @idTable int 
 as
 begin
@@ -303,12 +303,14 @@ begin
 		( DateCheckIn,
 		  DateCheckOut,
 		  idTable,
-		  status
+		  status,
+		  discount
 		)
 	values (GETDATE() ,
 			NULL,
 			@idTable,
-			0--status	
+			0,--status
+			0
 			)
 end
 
@@ -322,7 +324,7 @@ begin
 	values (@idBill,@idFood,@count)
 end
 go
-ALTER Proc USP_InsertBillInfo 
+create Proc USP_InsertBillInfo 
 @idBill int, @idFood int, @count int
 as 
 begin
@@ -347,3 +349,55 @@ begin
 	end
 end
 GO
+
+--UPDATE dbo.Bill SET  status = 1 where id = 1
+go
+
+	delete dbo.BillInfo
+	delete dbo.Bill
+
+
+create TRIGGER UTG_UpdateBillInfor
+ON dbo.BillInfo FOR INSERT, UPDATE
+AS
+BEGIN
+   DECLARE @idBill INT 
+   SELECT @idBill = idBill from Inserted
+   DECLARE @idTable INT
+   SELECT @idTable = idTable from dbo.Bill where id = @idBill AND status = 0
+   update dbo.TableFood set status = N'Có người' where	id = @idTable
+END
+GO
+	
+create TRIGGER UTG_UpdateBill
+ON dbo.Bill FOR UPDATE 
+AS
+BEGIN
+   DECLARE @idBill INT 
+   SELECT @idBill = id  from Inserted
+   --DECLARE @count INT
+   DECLARE @idTable INT
+   SELECT @idTable = idTable from dbo.Bill where id = @idBill
+   DECLARE @count INT = 0
+   select @count = COUNT(*) from dbo.Bill	where idTable = @idTable AND status = 0
+   if (@count = 0)
+   update dbo.TableFood set status = N'Trống' where id = @idTable
+END
+GO
+
+ALTER TABLE dbo.Bill ADD totalPrice Float
+delete dbo.BillInfo
+GO
+
+CREATE PROC USP_GetListBillBydate
+@checkIn date, @checkOut date
+AS
+BEGIN
+	select t.name as [Tên bàn], discount  as [Giảm giá], b.totalPrice AS [Tổng tiền], DateCheckIn[Ngày vào], DateCheckOut AS[Ngày ra]
+	from dbo.Bill AS b, dbo.TableFood AS t
+	WHERE DateCheckIn >= @checkIn AND DateCheckOut <= @checkOut AND b.status = 1
+	AND t.id = b.idTable
+END
+GO
+
+

@@ -33,9 +33,9 @@ namespace QuanLiCafe.DAO
             }
             return -1;
         }
-        public void CheckOut(int id)
+        public void CheckOut(int id, int discount, float totalPrice)
         {
-            string query = "UPDATE dbo.Bill SET  status = 1 where id = " + id;
+            string query = "UPDATE dbo.Bill SET dateCheckOut = GETDATE(),  status = 1 , " + "discount = " + discount +", totalPrice = " + totalPrice + "where id = " + id;
             DataProvider.Instance.ExecuteNonQuery(query);
         }
         public void InsertBill(int id)
@@ -43,6 +43,10 @@ namespace QuanLiCafe.DAO
             DataProvider.Instance.ExecuteNonQuery("exec USP_InsertBill @idTable", new object[] { id });
         }
 
+        public DataTable GetBillListByDate(DateTime checkIn, DateTime checkOut)
+        {
+            return DataProvider.Instance.ExecuteQuery("EXEC USP_GetListBillByDate @checkIn , @checkOut", new object[] { checkIn, checkOut });
+        }
         public int GetMaxIDBill()
         {
             try

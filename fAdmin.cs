@@ -18,6 +18,30 @@ namespace QuanLiCafe
         public fAdmin()
         {
             InitializeComponent();
+            LoadDayTimePickerBill();
+            LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
+            
         }
+        #region methods
+
+        void LoadDayTimePickerBill()
+        {
+            DateTime today = DateTime.Now;
+            dtpkFromDate.Value = new DateTime(today.Year, today.Month, 1);
+            dtpkToDate.Value = dtpkFromDate.Value.AddMonths(1).AddDays(-1);
+        }
+
+        void LoadListBillByDate(DateTime  checkIn, DateTime checkOut)
+        {
+            dtgvBill.DataSource = BillDAO.Instance.GetBillListByDate(checkIn, checkOut);
+        }
+        #endregion
+
+        #region Events
+        private void btnBillView_Click(object sender, EventArgs e)
+        {
+            LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);   
+        }
+        #endregion
     }
 }

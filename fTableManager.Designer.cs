@@ -43,7 +43,7 @@
             txbTotalPrice = new TextBox();
             cbSwitchTable = new ComboBox();
             btnSwitchTable = new Button();
-            numericDiscount = new NumericUpDown();
+            nmDiscount = new NumericUpDown();
             btnDiscount = new Button();
             btnCheckOut = new Button();
             panel4 = new Panel();
@@ -57,7 +57,7 @@
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericDiscount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nmDiscount).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nmFoodCount).BeginInit();
             SuspendLayout();
@@ -77,6 +77,7 @@
             adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             adminToolStripMenuItem.Size = new Size(67, 24);
             adminToolStripMenuItem.Text = "Admin";
+            adminToolStripMenuItem.Click += adminToolStripMenuItem_Click;
             // 
             // thôngTinTàiKhoanToolStripMenuItem
             // 
@@ -88,13 +89,13 @@
             // thôngToolStripMenuItem
             // 
             thôngToolStripMenuItem.Name = "thôngToolStripMenuItem";
-            thôngToolStripMenuItem.Size = new Size(224, 26);
+            thôngToolStripMenuItem.Size = new Size(214, 26);
             thôngToolStripMenuItem.Text = "Thông tin cá nhân ";
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(214, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             // 
             // panel2
@@ -141,7 +142,7 @@
             panel3.Controls.Add(txbTotalPrice);
             panel3.Controls.Add(cbSwitchTable);
             panel3.Controls.Add(btnSwitchTable);
-            panel3.Controls.Add(numericDiscount);
+            panel3.Controls.Add(nmDiscount);
             panel3.Controls.Add(btnDiscount);
             panel3.Controls.Add(btnCheckOut);
             panel3.Location = new Point(658, 474);
@@ -179,13 +180,13 @@
             btnSwitchTable.Text = "Chuyển bàn";
             btnSwitchTable.UseVisualStyleBackColor = false;
             // 
-            // numericDiscount
+            // nmDiscount
             // 
-            numericDiscount.Location = new Point(107, 45);
-            numericDiscount.Name = "numericDiscount";
-            numericDiscount.Size = new Size(88, 27);
-            numericDiscount.TabIndex = 4;
-            numericDiscount.TextAlign = HorizontalAlignment.Center;
+            nmDiscount.Location = new Point(107, 45);
+            nmDiscount.Name = "nmDiscount";
+            nmDiscount.Size = new Size(88, 27);
+            nmDiscount.TabIndex = 4;
+            nmDiscount.TextAlign = HorizontalAlignment.Center;
             // 
             // btnDiscount
             // 
@@ -287,7 +288,7 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericDiscount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nmDiscount).EndInit();
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)nmFoodCount).EndInit();
             ResumeLayout(false);
@@ -311,7 +312,7 @@
         private FlowLayoutPanel flpTable;
         private Button btnCheckOut;
         private Button btnDiscount;
-        private NumericUpDown numericDiscount;
+        private NumericUpDown nmDiscount;
         private Button btnSwitchTable;
         private ComboBox cbSwitchTable;
         private ColumnHeader columnHeader1;
