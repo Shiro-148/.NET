@@ -53,6 +53,7 @@
             cbFood = new ComboBox();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             flpTable = new FlowLayoutPanel();
+            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -87,13 +88,13 @@
             // thôngToolStripMenuItem
             // 
             thôngToolStripMenuItem.Name = "thôngToolStripMenuItem";
-            thôngToolStripMenuItem.Size = new Size(214, 26);
+            thôngToolStripMenuItem.Size = new Size(224, 26);
             thôngToolStripMenuItem.Text = "Thông tin cá nhân ";
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(214, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             // 
             // panel2
@@ -205,6 +206,7 @@
             btnCheckOut.TabIndex = 4;
             btnCheckOut.Text = "Thanh toán";
             btnCheckOut.UseVisualStyleBackColor = false;
+            btnCheckOut.Click += btnCheckOut_Click;
             // 
             // panel4
             // 
@@ -257,10 +259,15 @@
             // flpTable
             // 
             flpTable.AutoScroll = true;
-            flpTable.Location = new Point(12, 31);
+            flpTable.Location = new Point(0, 31);
             flpTable.Name = "flpTable";
-            flpTable.Size = new Size(640, 524);
+            flpTable.Size = new Size(655, 546);
             flpTable.TabIndex = 2;
+            // 
+            // sqlCommand1
+            // 
+            sqlCommand1.CommandTimeout = 30;
+            sqlCommand1.EnableOptimizedParameterBinding = false;
             // 
             // fTableManager
             // 
@@ -314,5 +321,6 @@
         private TextBox txbTotalPrice;
         private ComboBox cbCategory;
         private ComboBox cbCategory1;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
     }
 }
