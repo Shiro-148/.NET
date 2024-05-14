@@ -214,6 +214,7 @@
             AcceptButton = btnUpdate;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Center;
             CancelButton = btnExit;
             ClientSize = new Size(466, 413);
             Controls.Add(btnExit);
@@ -224,6 +225,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             Name = "fAcountProfile";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Thông tin cá nhân";
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

@@ -41,8 +41,6 @@
             columnHeader4 = new ColumnHeader();
             panel3 = new Panel();
             txbTotalPrice = new TextBox();
-            cbSwitchTable = new ComboBox();
-            btnSwitchTable = new Button();
             nmDiscount = new NumericUpDown();
             btnDiscount = new Button();
             btnCheckOut = new Button();
@@ -90,14 +88,14 @@
             // thôngToolStripMenuItem
             // 
             thôngToolStripMenuItem.Name = "thôngToolStripMenuItem";
-            thôngToolStripMenuItem.Size = new Size(224, 26);
+            thôngToolStripMenuItem.Size = new Size(214, 26);
             thôngToolStripMenuItem.Text = "Thông tin cá nhân ";
             thôngToolStripMenuItem.Click += thôngToolStripMenuItem_Click;
             // 
             // đăngXuấtToolStripMenuItem
             // 
             đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            đăngXuấtToolStripMenuItem.Size = new Size(224, 26);
+            đăngXuấtToolStripMenuItem.Size = new Size(214, 26);
             đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
             đăngXuấtToolStripMenuItem.Click += đăngXuấtToolStripMenuItem_Click;
             // 
@@ -113,7 +111,7 @@
             // 
             lsvBill.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             lsvBill.GridLines = true;
-            lsvBill.Location = new Point(3, -3);
+            lsvBill.Location = new Point(6, 3);
             lsvBill.Name = "lsvBill";
             lsvBill.Size = new Size(429, 359);
             lsvBill.TabIndex = 0;
@@ -143,8 +141,6 @@
             // panel3
             // 
             panel3.Controls.Add(txbTotalPrice);
-            panel3.Controls.Add(cbSwitchTable);
-            panel3.Controls.Add(btnSwitchTable);
             panel3.Controls.Add(nmDiscount);
             panel3.Controls.Add(btnDiscount);
             panel3.Controls.Add(btnCheckOut);
@@ -155,48 +151,33 @@
             // 
             // txbTotalPrice
             // 
+            txbTotalPrice.BackColor = SystemColors.GradientInactiveCaption;
             txbTotalPrice.Font = new Font("Arial", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txbTotalPrice.ForeColor = Color.OrangeRed;
-            txbTotalPrice.Location = new Point(201, 25);
+            txbTotalPrice.ImeMode = ImeMode.Disable;
+            txbTotalPrice.Location = new Point(257, 3);
+            txbTotalPrice.Multiline = true;
             txbTotalPrice.Name = "txbTotalPrice";
             txbTotalPrice.ReadOnly = true;
-            txbTotalPrice.Size = new Size(122, 28);
+            txbTotalPrice.Size = new Size(175, 27);
             txbTotalPrice.TabIndex = 7;
             txbTotalPrice.Text = "0";
             txbTotalPrice.TextAlign = HorizontalAlignment.Right;
             // 
-            // cbSwitchTable
-            // 
-            cbSwitchTable.FormattingEnabled = true;
-            cbSwitchTable.Location = new Point(3, 46);
-            cbSwitchTable.Name = "cbSwitchTable";
-            cbSwitchTable.Size = new Size(98, 28);
-            cbSwitchTable.TabIndex = 4;
-            // 
-            // btnSwitchTable
-            // 
-            btnSwitchTable.BackColor = SystemColors.ControlLight;
-            btnSwitchTable.Location = new Point(3, 3);
-            btnSwitchTable.Name = "btnSwitchTable";
-            btnSwitchTable.Size = new Size(98, 36);
-            btnSwitchTable.TabIndex = 6;
-            btnSwitchTable.Text = "Chuyển bàn";
-            btnSwitchTable.UseVisualStyleBackColor = false;
-            // 
             // nmDiscount
             // 
-            nmDiscount.Location = new Point(107, 45);
+            nmDiscount.Location = new Point(6, 9);
             nmDiscount.Name = "nmDiscount";
-            nmDiscount.Size = new Size(88, 27);
+            nmDiscount.Size = new Size(157, 27);
             nmDiscount.TabIndex = 4;
             nmDiscount.TextAlign = HorizontalAlignment.Center;
             // 
             // btnDiscount
             // 
             btnDiscount.BackColor = SystemColors.ControlLight;
-            btnDiscount.Location = new Point(107, 3);
+            btnDiscount.Location = new Point(6, 42);
             btnDiscount.Name = "btnDiscount";
-            btnDiscount.Size = new Size(88, 36);
+            btnDiscount.Size = new Size(157, 36);
             btnDiscount.TabIndex = 5;
             btnDiscount.Text = "Giảm giá";
             btnDiscount.UseVisualStyleBackColor = false;
@@ -204,9 +185,9 @@
             // btnCheckOut
             // 
             btnCheckOut.BackColor = SystemColors.ControlLight;
-            btnCheckOut.Location = new Point(329, 0);
+            btnCheckOut.Location = new Point(257, 45);
             btnCheckOut.Name = "btnCheckOut";
-            btnCheckOut.Size = new Size(106, 78);
+            btnCheckOut.Size = new Size(175, 33);
             btnCheckOut.TabIndex = 4;
             btnCheckOut.Text = "Thanh toán";
             btnCheckOut.UseVisualStyleBackColor = false;
@@ -277,6 +258,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
+            BackgroundImageLayout = ImageLayout.Center;
             ClientSize = new Size(1118, 567);
             Controls.Add(flpTable);
             Controls.Add(panel4);
@@ -285,6 +268,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "fTableManager";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Quản Lý Quán Cafe";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -316,8 +300,6 @@
         private Button btnCheckOut;
         private Button btnDiscount;
         private NumericUpDown nmDiscount;
-        private Button btnSwitchTable;
-        private ComboBox cbSwitchTable;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;

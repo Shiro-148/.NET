@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using QuanLiCafe.DAO;
 using QuanLiCafe.DTO;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 
 namespace QuanLiCafe
@@ -85,6 +86,8 @@ namespace QuanLiCafe
         {
             this.Close();
         }
+
+
     }
     public class AccountEvent : EventArgs
     {

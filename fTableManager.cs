@@ -243,5 +243,6 @@ namespace QuanLiCafe
         {
             this.Close();
         }
+
     }
 }

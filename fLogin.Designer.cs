@@ -136,6 +136,7 @@
             AcceptButton = btnLogin;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImageLayout = ImageLayout.Center;
             CancelButton = btnExit;
             ClientSize = new Size(616, 277);
             Controls.Add(panel1);
