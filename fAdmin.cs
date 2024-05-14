@@ -18,16 +18,24 @@ namespace QuanLiCafe
     public partial class fAdmin : Form
     {
         BindingSource foodList = new BindingSource();
+        BindingSource accountList = new BindingSource();
+
+        public Account loginAccount;
         public fAdmin()
         {
 
             InitializeComponent();
             dtgvFood.DataSource = foodList;
+            dtgvAccount.DataSource = accountList;
             LoadDayTimePickerBill();
             LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
             LoadListFood();
+            LoadAccount();
             AddFoodBinding();
+            AddAccountBinding();
+
             LoadCategoryIntoCombobox(cbFoodCategory);
+
 
         }
         #region methods
@@ -45,7 +53,133 @@ namespace QuanLiCafe
         }
         #endregion
 
+        List<Food> SearchFoodByName(string name)
+        {
+            List<Food> listFood = FoodDAO.Instance.SearchFoodByName(name);
+
+            return listFood;
+        }
+
+        void AddAccountBinding()
+        {
+            txbUserName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "UserName", true, DataSourceUpdateMode.Never));
+            txbDisplayName.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "DisplayName", true, DataSourceUpdateMode.Never));
+            nmAccountType.DataBindings.Add(new Binding("Text", dtgvAccount.DataSource, "Type", true, DataSourceUpdateMode.Never));
+        }
+
+        void LoadAccount()
+        {
+            accountList.DataSource = AccountDAO.Instance.GetlistAccount();
+        }
+
+        void AddAccount(string userName, string displayName, int type)
+        {
+            if (AccountDAO.Instance.InsertAccount(userName, displayName, type))
+            {
+                MessageBox.Show("Thêm tài khoản thành công");
+                LoadAccount();
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi thêm tài khoản");
+            }
+            LoadAccount();
+        }
+
+        void EditAccount(string userName, string displayName, int type)
+        {
+            if (AccountDAO.Instance.UpdateAccount(userName, displayName, type))
+            {
+                MessageBox.Show("Sửa tài khoản thành công");
+                LoadAccount();
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi sửa tài khoản");
+            }
+            LoadAccount();
+        }
+
+        void DeleteAccount(string userName)
+        {
+            if(loginAccount.UserName.Equals(userName))
+            {
+                MessageBox.Show("Không thể xóa tài khoản đang đăng nhập");
+                return;
+            }
+            if (AccountDAO.Instance.DeleteAccount(userName))
+            {
+                MessageBox.Show("Xóa tài khoản thành công");
+                LoadAccount();
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi xóa tài khoản");
+            }
+            LoadAccount();
+        }
+
+        void ResetPass(string userName)
+        {
+            if (AccountDAO.Instance.ResetPassword(userName))
+            {
+                MessageBox.Show("Đặt lại mật khẩu thành công");
+                LoadAccount();
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi đặt lại mật khẩu");
+            }
+        }
         #region Events
+
+        #region events
+
+
+
+        private void btnShowAccount_Click(object sender, EventArgs e)
+        {
+            LoadAccount();
+        }
+
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+            string displayName = txbDisplayName.Text;
+            int type = (int)nmAccountType.Value;
+
+            AddAccount(userName, displayName, type);
+        }
+
+
+
+        private void btnDeleteAcount_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+
+            DeleteAccount(userName);
+        }
+
+        private void btnEditAcount_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+            string displayName = txbDisplayName.Text;
+            int type = (int)nmAccountType.Value;
+            EditAccount(userName, displayName, type);
+        }
+
+        private void btnResetPass_Click(object sender, EventArgs e)
+        {
+            string userName = txbUserName.Text;
+            ResetPass(userName);
+        }
+
+        #endregion
+
+        private void btnSearchFood_Click(object sender, EventArgs e)
+        {
+            foodList.DataSource = SearchFoodByName(txbSearchFoodName.Text);
+        }
         private void btnBillView_Click(object sender, EventArgs e)
         {
             LoadListBillByDate(dtpkFromDate.Value, dtpkToDate.Value);
@@ -76,26 +210,36 @@ namespace QuanLiCafe
             LoadListFood();
         }
 
+
+
         private void txbFoodID_TextChanged(object sender, EventArgs e)
         {
-            if (dtgvFood.SelectedCells.Count > 0)
+            try
             {
-                int id = (int)dtgvFood.SelectedCells[0].OwningRow.Cells["CategoryID"].Value;
-                Category category = CategoryDAO.Instance.GetCategoryByID(id);
-                cbFoodCategory.SelectedItem = category;
-                int index = -1;
-                int i = 0;
-                foreach (Category item in cbFoodCategory.Items)
+                if (dtgvFood.SelectedCells.Count > 0 && dtgvFood.SelectedCells[0].OwningRow.Cells["CategoryID"].Value != null)
                 {
-                    if (item.ID == category.ID)
+                    int id = (int)dtgvFood.SelectedCells[0].OwningRow.Cells["CategoryID"].Value;
+                    Category category = CategoryDAO.Instance.GetCategoryByID(id);
+
+                    if (category != null)
                     {
-                        index = i;
-                        break;
+                        cbFoodCategory.SelectedItem = category;
+                        int index = -1;
+                        int i = 0;
+                        foreach (Category item in cbFoodCategory.Items)
+                        {
+                            if (item != null && item.ID == category.ID)
+                            {
+                                index = i;
+                                break;
+                            }
+                            i++;
+                        }
+                        cbFoodCategory.SelectedIndex = index;
                     }
-                    i++;
                 }
-                cbFoodCategory.SelectedIndex = index;
             }
+            catch { }
         }
 
         private void btbnAddFood_Click(object sender, EventArgs e)
@@ -155,6 +299,8 @@ namespace QuanLiCafe
             }
         }
 
+
+
         private event EventHandler insertFood;
         public event EventHandler InsertFood
         {
@@ -175,8 +321,9 @@ namespace QuanLiCafe
             add { updateFood += value; }
             remove { updateFood -= value; }
         }
-
-
         #endregion
+
+
+
     }
 }

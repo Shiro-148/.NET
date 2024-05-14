@@ -101,7 +101,7 @@
             panel24 = new Panel();
             btnResetPass = new Button();
             panel25 = new Panel();
-            cbAcountType = new ComboBox();
+            nmAccountType = new NumericUpDown();
             label10 = new Label();
             panel26 = new Panel();
             txbDisplayName = new TextBox();
@@ -150,6 +150,7 @@
             tabPage5.SuspendLayout();
             panel24.SuspendLayout();
             panel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nmAccountType).BeginInit();
             panel26.SuspendLayout();
             panel27.SuspendLayout();
             panel22.SuspendLayout();
@@ -272,6 +273,7 @@
             btnSearchFood.TabIndex = 4;
             btnSearchFood.Text = "Tìm";
             btnSearchFood.UseVisualStyleBackColor = true;
+            btnSearchFood.Click += btnSearchFood_Click;
             // 
             // panel5
             // 
@@ -840,23 +842,24 @@
             btnResetPass.TabIndex = 4;
             btnResetPass.Text = "Đặt lại mật khẩu";
             btnResetPass.UseVisualStyleBackColor = false;
+            btnResetPass.Click += btnResetPass_Click;
             // 
             // panel25
             // 
-            panel25.Controls.Add(cbAcountType);
+            panel25.Controls.Add(nmAccountType);
             panel25.Controls.Add(label10);
             panel25.Location = new Point(3, 133);
             panel25.Name = "panel25";
             panel25.Size = new Size(310, 59);
             panel25.TabIndex = 6;
             // 
-            // cbAcountType
+            // nmAccountType
             // 
-            cbAcountType.FormattingEnabled = true;
-            cbAcountType.Location = new Point(152, 14);
-            cbAcountType.Name = "cbAcountType";
-            cbAcountType.Size = new Size(155, 28);
-            cbAcountType.TabIndex = 2;
+            nmAccountType.Location = new Point(160, 20);
+            nmAccountType.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
+            nmAccountType.Name = "nmAccountType";
+            nmAccountType.Size = new Size(150, 27);
+            nmAccountType.TabIndex = 2;
             // 
             // label10
             // 
@@ -905,10 +908,9 @@
             // 
             // txbUserName
             // 
-            txbUserName.BackColor = SystemColors.AppWorkspace;
+            txbUserName.BackColor = SystemColors.ButtonHighlight;
             txbUserName.Location = new Point(152, 18);
             txbUserName.Name = "txbUserName";
-            txbUserName.ReadOnly = true;
             txbUserName.Size = new Size(155, 27);
             txbUserName.TabIndex = 2;
             // 
@@ -941,6 +943,7 @@
             btnShowAccount.TabIndex = 3;
             btnShowAccount.Text = "Xem";
             btnShowAccount.UseVisualStyleBackColor = true;
+            btnShowAccount.Click += btnShowAccount_Click;
             // 
             // btnEditAcount
             // 
@@ -950,6 +953,7 @@
             btnEditAcount.TabIndex = 2;
             btnEditAcount.Text = "Sửa";
             btnEditAcount.UseVisualStyleBackColor = true;
+            btnEditAcount.Click += btnEditAcount_Click;
             // 
             // btnDeleteAcount
             // 
@@ -959,6 +963,7 @@
             btnDeleteAcount.TabIndex = 1;
             btnDeleteAcount.Text = "Xóa";
             btnDeleteAcount.UseVisualStyleBackColor = true;
+            btnDeleteAcount.Click += btnDeleteAcount_Click;
             // 
             // btnAddAccount
             // 
@@ -968,6 +973,7 @@
             btnAddAccount.TabIndex = 0;
             btnAddAccount.Text = "Thêm";
             btnAddAccount.UseVisualStyleBackColor = true;
+            btnAddAccount.Click += btnAddAccount_Click;
             // 
             // dtgvAccount
             // 
@@ -1033,6 +1039,7 @@
             panel24.ResumeLayout(false);
             panel25.ResumeLayout(false);
             panel25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nmAccountType).EndInit();
             panel26.ResumeLayout(false);
             panel26.PerformLayout();
             panel27.ResumeLayout(false);
@@ -1115,7 +1122,6 @@
         private ComboBox cbTableStatus;
         private Panel panel24;
         private Panel panel25;
-        private ComboBox cbAcountType;
         private Label label10;
         private Panel panel26;
         private TextBox txbDisplayName;
@@ -1132,5 +1138,6 @@
         private Button btnResetPass;
         private Panel panel3;
         private DataGridView dtgvFood;
+        private NumericUpDown nmAccountType;
     }
 }

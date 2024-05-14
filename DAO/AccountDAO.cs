@@ -36,6 +36,11 @@ namespace QuanLiCafe.DAO
             return result > 0;
         }
 
+        public DataTable GetlistAccount()
+        {
+            return DataProvider.Instance.ExecuteQuery("Select userName, displayName, type from Account");
+        }
+
         public Account GetAccountByUserName(string userName)
         {
             DataTable data = DataProvider.Instance.ExecuteQuery("Select * from Account where userName = '" + userName + "'");
@@ -45,6 +50,36 @@ namespace QuanLiCafe.DAO
                 return new Account(item);
             }
             return null;
+        }
+
+        public bool InsertAccount(string name, string displayName, int type)
+        {
+            string query = string.Format("Insert dbo.Account (UserName, DisplayName, Type) values (N'{0}', N'{1}', {2})", name, displayName, type);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+
+        public bool UpdateAccount(string name, string displayName, int type)
+        {
+            string query = string.Format("Update dbo.Account set  DisplayName = N'{1}', Type = {2} where UserName = N'{0}'",name, displayName, type);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);  
+
+            return result > 0;
+        }
+
+        public bool DeleteAccount(string name)
+        {
+            string query = string.Format("Delete Account where UserName = N'{0}'", name);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+
+            return result > 0;
+        }
+        public bool ResetPassword(string name)
+        {
+            string query = string.Format("Update Account set Password = N'0' where UserName = N'{0}'", name);
+            int result = DataProvider.Instance.ExecuteNonQuery(query);
+            return result > 0;
         }
     }
 }

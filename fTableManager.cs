@@ -39,7 +39,7 @@ namespace QuanLiCafe
         void ChangeAccount(int type)
         {
             adminToolStripMenuItem.Enabled = type == 1;
-            
+
             thôngTinTàiKhoanToolStripMenuItem.Text += " (" + loginAccount.DisplayName + ")";
 
         }
@@ -187,6 +187,7 @@ namespace QuanLiCafe
         private void adminToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fAdmin f = new fAdmin();
+            f.loginAccount = loginAccount;
             f.InsertFood += f_InsertFood;
             f.DeleteFood += f_DeleteFood;
             f.UpdateFood += f_UpdateFood;
@@ -236,6 +237,11 @@ namespace QuanLiCafe
         private void thôngTinTàiKhoanToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
